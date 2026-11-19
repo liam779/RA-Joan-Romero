@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Taller AR - TEL 315 | UCB</title>
 
-  <!-- Bibliotecas estables: A-Frame 1.3.0 y AR.js 3.4.5 vía jsDelivr -->
+  <!-- Bibliotecas estables: A-Frame 1.3.0 y AR.js 3.4.5 -->
   <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.js"></script>
 
@@ -104,7 +104,7 @@
     renderer="logarithmicDepthBuffer: true; alpha: true; antialias: false; precision: medium;"
     arjs="sourceType: webcam; facingMode: environment; debugUIEnabled: false; detectionMode: mono; trackingMethod: best; sourceWidth: 640; sourceHeight: 480; displayWidth: 640; displayHeight: 480;"
   >
-    <!-- Tarjeta A: Marcador HIRO -> Cubo Azul -->
+    <!-- Tarjeta A: Marcador HIRO -> Foto (sube el archivo junto a index.html) -->
     <a-marker
       preset="hiro"
       id="marcador-a"
@@ -113,15 +113,15 @@
       smoothTolerance="0.01"
       smoothThreshold="2"
     >
-      <a-entity id="contenedor-cubo" scale="1 1 1">
-        <a-box
-          id="objeto-cubo"
+      <a-entity id="contenedor-foto" scale="1 1 1">
+        <a-plane
+          id="objeto-foto"
+          src="400438c0-29eb-4203-ae28-e6085f343269.jpg"
           position="0 0.5 0"
-          width="1"
-          height="1"
-          depth="1"
-          color="#1d4ed8"
-        ></a-box>
+          rotation="-90 0 0"
+          width="1.2"
+          height="1.2"
+        ></a-plane>
       </a-entity>
     </a-marker>
 
@@ -151,7 +151,7 @@
     const btnEscala = document.getElementById('btn-escala');
     const etiquetaEstado = document.getElementById('estado-tamano');
     const estadoMarcador = document.getElementById('estado-marcador');
-    const contenedorCubo = document.getElementById('contenedor-cubo');
+    const contenedorFoto = document.getElementById('contenedor-foto');
     const contenedorEsfera = document.getElementById('contenedor-esfera');
     const marcadorA = document.getElementById('marcador-a');
     const marcadorB = document.getElementById('marcador-b');
@@ -161,13 +161,13 @@
     btnEscala.addEventListener('click', () => {
       esAmpliado = !esAmpliado;
       const factor = esAmpliado ? '1.5 1.5 1.5' : '1 1 1';
-      contenedorCubo.setAttribute('scale', factor);
+      contenedorFoto.setAttribute('scale', factor);
       contenedorEsfera.setAttribute('scale', factor);
       etiquetaEstado.textContent = esAmpliado ? 'Ampliado' : 'Normal';
     });
 
     marcadorA.addEventListener('markerFound', () => {
-      estadoMarcador.textContent = 'Detectado: HIRO (Cubo Azul)';
+      estadoMarcador.textContent = 'Detectado: HIRO (Foto)';
     });
     marcadorA.addEventListener('markerLost', () => {
       estadoMarcador.textContent = 'Apunta a Hiro o Kanji';
